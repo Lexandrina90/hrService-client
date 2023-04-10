@@ -5,14 +5,14 @@ import {
   Route,
 } from "react-router-dom";
 
-import Login from "./service/Login";
+import LoginPage from "./pages/LoginPage"
 
 const App = () => {
   return (
     <div className="ui container">
       <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
     </div>
