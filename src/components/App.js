@@ -5,7 +5,8 @@ import {
   Route,
 } from "react-router-dom";
 
-import LoginPage from "../pages/LoginPage"
+import LoginPage from "../pages/LoginPage";
+import EmployeeForm from "./service/EmployeeForm";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route path="/service/form" element={<EmployeeForm />} />
       </Routes>
     </BrowserRouter>
     </div>
