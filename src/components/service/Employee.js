@@ -15,3 +15,9 @@ export async function getEmployee(id) {
   const data = await response.json();
   return data;
 }
+
+export async function getEmployees() {
+  const response = await fetch('/api/service.employees');
+  const data = await response.json();
+  return data;
+}

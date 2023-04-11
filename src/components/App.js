@@ -7,6 +7,7 @@ import {
 
 import LoginPage from "../pages/LoginPage";
 import EmployeeForm from "./service/EmployeeForm";
+import EmployeeList from "./service/EmployeeList";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/service/form" element={<EmployeeForm />} />
+        <Route path="/service/employees" element={<EmployeeList />} />
       </Routes>
     </BrowserRouter>
     </div>
