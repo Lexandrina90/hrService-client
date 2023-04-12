@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { saveEmployee, getEmployee } from '../service/Employee';
+import { saveEmployee, getEmployee } from '../../services/Employee';
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, Segment, Grid} from "semantic-ui-react";
 
@@ -29,9 +29,9 @@ const EmployeeForm = ({ id }) => {
     event.preventDefault();
     const employee = { fio, position, gender, education, birthDate, startDate };
     saveEmployee(employee).then(() => {
-      navigate('/service/employees');
+      navigate('/employees');
     });
-    navigate('/service/employees');
+    navigate('/employees');
   };
 
   return (
@@ -87,7 +87,7 @@ const EmployeeForm = ({ id }) => {
             <Button.Group fluid>
               <Button type='submit'>Сохранить</Button>
               <Button.Or />
-              <Button type="button" onClick={() => navigate('/service/employees')}>Отмена</Button>
+              <Button type="button" onClick={() => navigate('/employees')}>Отмена</Button>
             </Button.Group>
           </Form>
         </Segment>

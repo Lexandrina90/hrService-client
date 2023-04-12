@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {Table} from 'semantic-ui-react';
-import {getEmployees} from '../service/Employee';
+import { getEmployees } from '../../services/Employee';
+import axios from 'axios';
 
 const EmployeeList = () => {
   const [employees, setEmployees] =useState([]);
 
   useEffect(() => {
-    getEmployees().then((data) => {
-      setEmployees(data);
-    })
-  },[])
+    getEmployees()
+      .then(response => setEmployees(response.data))
+      .catch(error => console.error(error));
+  }, []);
 
   return (
     <Table striped >
@@ -35,7 +36,7 @@ const EmployeeList = () => {
             <Table.Cell>{employee.education}</Table.Cell>
             <Table.Cell>{employee.startDate}</Table.Cell>
             <Table.Cell>
-              <Link to={`/service/employees/${employee.id}`}>Редактировать</Link>
+              <Link to={`/employees/form/${employee.id}`}>Редактировать</Link>
             </Table.Cell>
           </Table.Row>
         ))}
