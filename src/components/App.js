@@ -6,8 +6,8 @@ import {
 } from "react-router-dom";
 
 import LoginPage from "../pages/LoginPage";
-import EmployeeForm from "./service/EmployeeForm";
-import EmployeeList from "./service/EmployeeList";
+import EmployeeListPage from "../pages/EmployeeListPage";
+import EmployeeFormPage from "../pages/EmployeeFormPage";
 
 const App = () => {
   return (
@@ -15,8 +15,8 @@ const App = () => {
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/service/form" element={<EmployeeForm />} />
-        <Route path="/service/employees" element={<EmployeeList />} />
+        <Route path="/service/employees" element={<EmployeeListPage />} />
+        <Route path="/service/form" element={<EmployeeFormPage />} />
       </Routes>
     </BrowserRouter>
     </div>
