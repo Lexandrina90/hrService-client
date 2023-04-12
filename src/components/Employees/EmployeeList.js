@@ -30,6 +30,7 @@ const EmployeeList = () => {
           <Table.HeaderCell>Пол</Table.HeaderCell>
           <Table.HeaderCell>Дата Рождения</Table.HeaderCell>
           <Table.HeaderCell>Должность</Table.HeaderCell>
+          <Table.HeaderCell>Грейд</Table.HeaderCell>
           <Table.HeaderCell>Образование</Table.HeaderCell>
           <Table.HeaderCell>Дата приема на работу</Table.HeaderCell>
           <Table.HeaderCell></Table.HeaderCell>
@@ -42,6 +43,7 @@ const EmployeeList = () => {
             <Table.Cell>{employee.gender}</Table.Cell>
             <Table.Cell>{employee.birthDate}</Table.Cell>
             <Table.Cell>{employee.position}</Table.Cell>
+            <Table.Cell>{employee.grade}</Table.Cell>
             <Table.Cell>{employee.education}</Table.Cell>
             <Table.Cell>{employee.startDate}</Table.Cell>
             <Table.Cell>

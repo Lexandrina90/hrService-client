@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { saveEmployee, getEmployee } from '../../services/Employee';
 import { useNavigate } from 'react-router-dom';
-import { Button, Form, Segment, Grid} from "semantic-ui-react";
+import { Button, Form, Segment, Grid } from "semantic-ui-react";
 
 const EmployeeForm = ({ id }) => {
   const [fio, setFio] = useState('');
@@ -10,6 +10,7 @@ const EmployeeForm = ({ id }) => {
   const [education, setEducation] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [startDate, setStartDate] = useState('');
+  const [grade, setGrade] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,13 +22,14 @@ const EmployeeForm = ({ id }) => {
         setEducation(employee.education);
         setBirthDate(employee.birthDate);
         setStartDate(employee.startDate);
+        setGrade(employee.grade)
       });
     }
   }, [id]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const employee = { fio, position, gender, education, birthDate, startDate };
+    const employee = { fio, position, gender, education, birthDate, startDate, grade };
     saveEmployee(employee).then(() => {
       navigate('/employees');
     });
@@ -36,8 +38,8 @@ const EmployeeForm = ({ id }) => {
 
   return (
     <Grid centered>
-      <Grid.Column style={{maxWidth: 800}}>
-        <Segment inverted  style={{margin: 'auto', marginTop: "20px", backgroundColor: "teal"}}>
+      <Grid.Column style={{ maxWidth: 800 }}>
+        <Segment inverted style={{ margin: 'auto', marginTop: "20px", backgroundColor: "teal" }}>
           <Form inverted onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Input
@@ -54,7 +56,7 @@ const EmployeeForm = ({ id }) => {
                 onChange={(e) => setGender(e.target.value)}
                 width="4"
               />
-               <Form.Input
+              <Form.Input
                 fluid label='Дата Рождения'
                 placeholder='Дата Рождения'
                 type='date'
@@ -63,27 +65,38 @@ const EmployeeForm = ({ id }) => {
                 width={4}
               />
             </Form.Group>
+            <Form.Group>
               <Form.Input
                 fluid label='Должность'
                 placeholder='Должность'
                 value={position}
                 onChange={(e) => setPosition(e.target.value)}
+                width="15"
               />
               <Form.Input
-                fluid label='Образование'
-                placeholder='Образование'
-                value={education}
-                onChange={(e) => setEducation(e.target.value)}
-                
+                fluid label='Грейд'
+                placeholder='Грейд'
+                type="number"
+                value={grade}
+                onChange={(e) => setGrade(e.target.value)}
+                width={3}
               />
-              <Form.Input
-                fluid label='Дата приема на работу'
-                placeholder='Дата приема на работу'
-                type='date'
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                width={4}
-              />
+            </Form.Group>
+            <Form.Input
+              fluid label='Образование'
+              placeholder='Образование'
+              value={education}
+              onChange={(e) => setEducation(e.target.value)}
+
+            />
+            <Form.Input
+              fluid label='Дата приема на работу'
+              placeholder='Дата приема на работу'
+              type='date'
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              width={4}
+            />
             <Button.Group fluid>
               <Button type='submit'>Сохранить</Button>
               <Button.Or />
