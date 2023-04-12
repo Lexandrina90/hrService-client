@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import {Table} from 'semantic-ui-react';
-import { getEmployees } from '../../services/Employee';
+import {Table, Button} from 'semantic-ui-react';
+import { deleteEmployee, getEmployees } from '../../services/Employee';
 import axios from 'axios';
 
 const EmployeeList = () => {
@@ -12,6 +12,15 @@ const EmployeeList = () => {
       .then(response => setEmployees(response.data))
       .catch(error => console.error(error));
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteEmployee(id);
+      setEmployees(employees.filter(e => e.id !== id))
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <Table striped >
@@ -36,6 +45,7 @@ const EmployeeList = () => {
             <Table.Cell>{employee.education}</Table.Cell>
             <Table.Cell>{employee.startDate}</Table.Cell>
             <Table.Cell>
+              <Button onClick={() => handleDelete(employee.id)} color="red" icon="trash alternate" />
               <Link to={`/employees/form/${employee.id}`}>Редактировать</Link>
             </Table.Cell>
           </Table.Row>

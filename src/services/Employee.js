@@ -36,6 +36,15 @@ export async function getEmployees() {
   }
 }
 
+export const deleteEmployee = async (employeeId) => {
+  try {
+    const response = await client.delete(`/employees/${employeeId}`);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 
 // import React from "react";
 
