@@ -16,7 +16,7 @@ const App = () => {
       <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/auth" element={<LoginPage />} />
         <Route path="/employees" element={<EmployeeListPage />} />
         <Route path="/employees/form" element={<EmployeeFormPage />} />
       </Routes>

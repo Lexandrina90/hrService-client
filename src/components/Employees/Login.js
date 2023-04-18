@@ -1,48 +1,47 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Header, Image, Message, Segment } from "semantic-ui-react";
 import keyImage from "../../img/Login/key.png";
+import auth from "../../services/auth";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [loading,setLoading] =useState(false);
+  const [error,setError] = useState(null);
  
 
   const switchHandler = () => {
-    setIsLogin((prevState) => !prevState)
+    setIsLogin((prevState) => !prevState);
+    setError(null);
   }
-
-
   const submitHandler = async (event) => {
     event.preventDefault();
+    setLoading(true);
+    setError(null);
 
-    const requestBody = {
-      email: email,
-      password: password,
-    }
-    if (!isLogin) {
-      requestBody.name = name;
-    }
-    let url;
-    if (isLogin) {
-      url = "http://localhost:3000/api/auth/login";
-    } else {
-      url = "http://localhost:3000/api/auth/signup";
-    }
     try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      })
-    }
-    catch (error) {
-      console.log(error);
+      if (isLogin) {
+        const user = await auth.login(email,password);
+        setLoading(false);
+        if (user.access) {
+          window.location.reload();
+        }
+      } else {
+        const user = await auth.register(name,email,password);
+        setLoading(false);
+        if (user.access) {
+          window.location.reload();
+        }
+      }
+
+    } catch (error) {
+      setLoading(false);
+      setError(error.response?.data?.message || error.message);
     }
   }
+
 
   return (
     <div className="ui centered grid" style={{ marginTop: "100px" }}>
@@ -106,6 +105,38 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
+ // const submitHandler = async (event) => {
+  //   event.preventDefault();
+
+  //   const requestBody = {
+  //     email: email,
+  //     password: password,
+  //   }
+  //   if (!isLogin) {
+  //     requestBody.name = name;
+  //   }
+  //   let url;
+  //   if (isLogin) {
+  //     url = "http://localhost:3000/api/auth/login";
+  //   } else {
+  //     url = "http://localhost:3000/api/auth/signup";
+  //   }
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(requestBody),
+  //     })
+  //   }
+  //   catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
 
 

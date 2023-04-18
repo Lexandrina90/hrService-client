@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import ApiClient from "./ApiClient";
 
-const client = new ApiClient('http://localhost:3000/api');
+const client = new ApiClient('http://localhost:3001/api');
 
 export async function saveEmployee(employee) {
   try {
@@ -29,7 +29,7 @@ export async function getEmployee(id) {
 
 export async function getEmployees() {
   try {
-    const data = await axios.get('/employees');
+    const data = await client.get('/employees');
     return data;
   } catch (error) {
     console.error(error);
